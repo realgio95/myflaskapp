@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, redirect, url_for
+from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
 from data import Articles
 from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
@@ -46,6 +46,7 @@ class RegisterForm(Form):
     password = PasswordField('Password', [
         validators.DataRequired(), validators.EqualTo(
             'confirm', message='Passwords do not match')])
+    confirm = PasswordField('Confirm Password')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -78,7 +79,7 @@ def register():
 
 # def login():
 #     for =
-
+#
 if __name__ == '__main__':
-	app.secret_key = 'secret123'
+    app.secret_key = 'secret123'
     app.run(debug=True)
