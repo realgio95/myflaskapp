@@ -233,14 +233,14 @@ def edit_article(id):
     # Get the article by it's id
     result = cur.execute("SELECT * FROM articles where id = %s", (id))
 
-    article = fetchone()
+    article = cur.fetchone()
     cur.close()
 
     form = ArticleForm(request.form)
 
     # Populate the articles form fields
-    title = form.title.data
-    body = form.body.data
+    form.title.data = article['title']
+    form.body.data = article['body']
 
     if request.method == 'POST' and form.validate():
         title = request.form['title']
@@ -255,11 +255,30 @@ def edit_article(id):
 
         cur.close()
 
-        flash('Article Updated', success)
+        flash('Article Updated', 'success')
 
         return redirect(url_for('dashboard'))
 
-    return render_template('/edit_article.html', form)
+    return render_template('/edit_article.html', form=form)
+
+
+@app.route('/delete_article/<string:id>', methods=['POST'])
+@is_logged_in
+def delete_article(id):
+    # Create Cursor
+    cur = mysql.connection.cursor()
+
+    # Execute
+    cur.execute("DELETE FROM articles WHERE id = %s", (id))
+
+    # Commit to DB
+    mysql.connection.commit()
+
+    # Close connection
+    cur.close()
+
+    return redirect(url_for("dashboard"))
+
 
 if __name__ == '__main__':
     app.secret_key = 'secret123'
