@@ -17,7 +17,7 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 # init MYSQL
 mysql = MySQL(app)
 
-Articles = Articles()
+# Articles = Articles()
 
 # Index
 
@@ -36,13 +36,39 @@ def about():
 # All Articles
 @app.route('/articles')
 def articles():
+    cur = mysql.connection.cursor()
+
+    result = cur.execute("SELECT * FROM articles")
+
+    articles = cur.fetchall()
+
+    if result > 0:
+        return render_template('articles.html', articles=articles)
+    else:
+        msg = "No articles Found"
+        return render_template('articles.html', msg)
+    cur.close()
+
     return render_template('articles.html', articles=Articles)
 
 
 # Single Article
 @app.route('/article/<string:id>/')
 def article(id):
-    return render_template('article.html', id=id)
+    cur = mysql.connection.cursor()
+
+    result = cur.execute("SELECT * FROM articles WHERE id = %s", (id))
+
+    article = cur.fetchone()
+
+    if result > 0:
+        return render_template('article.html', article=article)
+    else:
+        msg = "No articles Found"
+        return render_template('articles.html', msg)
+    cur.close()
+
+    return render_template('articles.html', articles=Articles)
 
 
 # Register Form Class
@@ -147,7 +173,20 @@ def logout():
 @app.route('/dashboard')
 @is_logged_in
 def dashboard():
+    cur = mysql.connection.cursor()
 
+    # Get the articles
+    result = cur.execute("SELECT * FROM articles")
+
+    articles = cur.fetchall()
+
+    if result > 0:
+        return render_template('dashboard.html', articles=articles)
+    else:
+        msg = 'NO Articles Found'
+        render_template('dashboard.html', msg)
+
+    cur.close()
     return render_template('dashboard.html')
 
 # Article Form Class
@@ -170,7 +209,7 @@ def add_article():
         cur = mysql.connection.cursor()
 
         # Execute
-        cur.execute("INSERT INTO articles(title, body, author) VALUES(%s %s %s)",
+        cur.execute("INSERT INTO articles(title, body, author) VALUES(%s, %s, %s)",
                     (title, body, session['username']))
 
         # Commit to the database
