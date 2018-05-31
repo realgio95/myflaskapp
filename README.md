@@ -18,15 +18,15 @@ Fork the repository and cd into to Project Directory
 6. Set up the Database
 
 ### Run the Project
-cd myflaskapp
-python app.py
-Point yor browser to [Localhost](https://localhost:5000)
+'cd myflaskapp'
+'python app.py'
+'Point yor browser to [Localhost](https://localhost:5000)'
 
 
 ##### Setting up Database, make sure that database is set up
 `CREATE DATABASE myflaskapp;`
 
 #### USE myflaskapp db using MySQL
-`CREATE TABLE users (id , username, email, password)`
+`CREATE TABLE users (id INT(11) AUTO_INCREMENT PRIMARY KEY NOT NULL, name VARCHAR(30), username VARCHAR(30),email VARCHAR(100), password VARCHAR(100), register_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP)`
 
-```CREATE TABLE articles (id INT(11), AUTO_INCREMENT PRIMARY KEY, title VARCHAR(255), author VARCHAR(100), body TEXT, create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP);```
+```CREATE TABLE articles (id INT(11) AUTO_INCREMENT PRIMARY KEY, title VARCHAR(255), author VARCHAR(100), body TEXT, create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP);```

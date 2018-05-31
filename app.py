@@ -1,27 +1,27 @@
 from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
-from data import Articles
 from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
+from db import DBconfig
 
 app = Flask(__name__)
 
+DBconfig = DBconfig()
+
 # COnfigure DB
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Dapparoot95!'
-app.config['MYSQL_DB'] = 'myflaskapp'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+app.config['MYSQL_HOST'] = DBconfig["host"]
+app.config['MYSQL_USER'] = DBconfig["user"]
+app.config['MYSQL_PASSWORD'] = DBconfig["password"]
+app.config['MYSQL_DB'] = DBconfig["DBName"]
+app.config['MYSQL_CURSORCLASS'] = DBconfig["dictDB"]
+
 
 # init MYSQL
 mysql = MySQL(app)
 
-# Articles = Articles()
 
 # Index
-
-
 @app.route('/')
 def index():
     return render_template('home.html')
@@ -46,7 +46,7 @@ def articles():
         return render_template('articles.html', articles=articles)
     else:
         msg = "No articles Found"
-        return render_template('articles.html', msg)
+        return render_template('articles.html')
     cur.close()
 
     return render_template('articles.html', articles=Articles)
@@ -65,7 +65,7 @@ def article(id):
         return render_template('article.html', article=article)
     else:
         msg = "No articles Found"
-        return render_template('articles.html', msg)
+        return render_template('articles.html', msg=msg)
     cur.close()
 
     return render_template('articles.html', articles=Articles)
@@ -184,7 +184,7 @@ def dashboard():
         return render_template('dashboard.html', articles=articles)
     else:
         msg = 'NO Articles Found'
-        render_template('dashboard.html', msg)
+        render_template('dashboard.html', a=msg)
 
     cur.close()
     return render_template('dashboard.html')
