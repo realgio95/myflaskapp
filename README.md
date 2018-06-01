@@ -32,3 +32,15 @@ Fork the repository and cd into to Project Directory
 `CREATE TABLE users (id INT(11) AUTO_INCREMENT PRIMARY KEY NOT NULL, name VARCHAR(30), username VARCHAR(30),email VARCHAR(100), password VARCHAR(100), register_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP)`
 
 ```CREATE TABLE articles (id INT(11) AUTO_INCREMENT PRIMARY KEY, title VARCHAR(255), author VARCHAR(100), body TEXT, create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP);```
+
+Set Up db.py as follows:
+```def DBconfig():
+    dbconfig = {
+        "host": 'localhost',
+        "user": 'INSERT DB USER NAME',
+        "password": 'INSERT DB PASSWORD',
+        "DBName": 'myflaskapp',
+        "dictDB": 'DictCursor',
+    }
+    return dbconfig
+```
