@@ -29,12 +29,17 @@ Fork the repository and cd into to Project Directory
 `CREATE DATABASE myflaskapp;`
 
 #### USE myflaskapp db using MySQL
-`CREATE TABLE users (id INT(11) AUTO_INCREMENT PRIMARY KEY NOT NULL, name VARCHAR(30), username VARCHAR(30),email VARCHAR(100), password VARCHAR(100), register_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP)`
+```
+CREATE TABLE users (id INT(11) AUTO_INCREMENT PRIMARY KEY NOT NULL, name VARCHAR(30), username VARCHAR(30),email VARCHAR(100), password VARCHAR(100), register_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
+```
 
-```CREATE TABLE articles (id INT(11) AUTO_INCREMENT PRIMARY KEY, title VARCHAR(255), author VARCHAR(100), body TEXT, create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP);```
+```
+CREATE TABLE articles (id INT(11) AUTO_INCREMENT PRIMARY KEY, title VARCHAR(255), author VARCHAR(100), body TEXT, create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+```
 
 Set Up db.py as follows:
-```def DBconfig():
+```
+def DBconfig():
     dbconfig = {
         "host": 'localhost',
         "user": 'INSERT DB USER NAME',
