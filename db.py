@@ -2,7 +2,7 @@ def DBconfig():
     dbconfig = {
         "host": 'localhost',
         "user": 'root',
-        "password": 'Dapparoot95!',
+        "password": 'Dappa95!',
         "DBName": 'myflaskapp',
         "dictDB": 'DictCursor',
     }
