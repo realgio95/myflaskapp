@@ -19,7 +19,9 @@ Fork the repository and cd into to Project Directory
 
 ### Run the Project
 `cd myflaskapp`
+
 `python app.py`
+
 `Point yor browser to [Localhost](https://localhost:5000)`
 
 
