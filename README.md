@@ -18,9 +18,9 @@ Fork the repository and cd into to Project Directory
 6. Set up the Database
 
 ### Run the Project
-'cd myflaskapp'
-'python app.py'
-'Point yor browser to [Localhost](https://localhost:5000)'
+`cd myflaskapp`
+`python app.py`
+`Point yor browser to [Localhost](https://localhost:5000)`
 
 
 ##### Setting up Database, make sure that database is set up
